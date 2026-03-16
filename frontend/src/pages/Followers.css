@@ -1,0 +1,228 @@
+/* Followers Styles Override */
+
+.followers-container {
+  min-height: 100vh;
+  background: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.followers-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(180deg, rgba(14, 165, 160, 0.08) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.followers-content {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  animation: fadeUp 0.6s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.followers-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  animation: slideIn 0.5s ease;
+}
+
+.followers-header h1 {
+  color: var(--text-main);
+  margin: 0 0 0.5rem 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.followers-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+  background: var(--glass-bg);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+}
+
+.tab {
+  flex: 1;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--text-main);
+}
+
+.tab.active {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 6px 14px rgba(14, 165, 160, 0.28);
+}
+
+.followers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.follower-card {
+  background: var(--glass-bg);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  transition: all var(--transition-bounce);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  position: relative;
+}
+
+.follower-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(14, 165, 160, 0.26);
+}
+
+.follower-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 800;
+  flex-shrink: 0;
+  border: 2px solid white;
+  box-shadow: 0 4px 10px rgba(14, 165, 160, 0.24);
+}
+
+.follower-info {
+  flex: 1;
+}
+
+.follower-info h3 {
+  color: var(--text-main);
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.follower-info p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.action-btn {
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 0.85rem;
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(14, 165, 160, 0.32);
+}
+
+.action-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 165, 160, 0.4);
+}
+
+.action-btn.unfollow {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+  box-shadow: none;
+}
+
+.action-btn.unfollow:hover {
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.empty-state {
+  background: var(--glass-bg);
+  padding: 4rem 2rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  border: 1px dashed var(--border-light);
+  grid-column: 1 / -1;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-state h2 {
+  color: var(--text-main);
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .followers-content {
+    padding: 1.5rem;
+  }
+  .followers-header h1 {
+    font-size: 1.75rem;
+  }
+  .tabs {
+    flex-wrap: wrap;
+  }
+  .follower-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .action-btn {
+    width: 100%;
+  }
+}

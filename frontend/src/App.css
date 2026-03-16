@@ -1,0 +1,39 @@
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container::before,
+.app-container::after {
+  content: '';
+  position: fixed;
+  inset: auto;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(70px);
+}
+
+.app-container::before {
+  width: 260px;
+  height: 260px;
+  top: 8%;
+  right: 6%;
+  background: rgba(14, 165, 160, 0.18);
+}
+
+.app-container::after {
+  width: 310px;
+  height: 310px;
+  bottom: 6%;
+  left: 4%;
+  background: rgba(251, 146, 60, 0.18);
+}

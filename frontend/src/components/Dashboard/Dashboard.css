@@ -1,0 +1,218 @@
+/* Dashboard Styles Override */
+
+.dashboard-container {
+  min-height: 100vh;
+  background: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-container::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(14, 165, 160, 0.1) 0%, transparent 62%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard-container::after {
+  content: '';
+  position: absolute;
+  bottom: -180px;
+  left: -180px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.11) 0%, transparent 64%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 2.75rem;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.6s ease;
+}
+
+.welcome-section {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface-color) 76%, white), color-mix(in srgb, var(--surface-color) 92%, var(--primary) 8%));
+  padding: 2.4rem 2.2rem;
+  border-radius: 1.15rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--gradient-primary);
+  border-top-left-radius: 1.15rem;
+  border-bottom-left-radius: 1.15rem;
+}
+
+.welcome-section h1 {
+  color: var(--text-main);
+  margin: 0 0 0.45rem 0;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  font-weight: 700;
+}
+
+.welcome-section p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  background: color-mix(in srgb, var(--surface-color) 88%, var(--primary) 12%);
+  padding: 1.55rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all var(--transition-bounce);
+  cursor: pointer;
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(14, 165, 160, 0.26);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: rgba(14, 165, 160, 0.12);
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+}
+
+.dashboard-card:hover .card-icon {
+  transform: scale(1.1);
+  background: rgba(14, 165, 160, 0.16);
+}
+
+.dashboard-card h3 {
+  color: var(--text-muted);
+  margin: 0 0 0.5rem 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.card-number {
+  color: var(--text-main);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  line-height: 1;
+}
+
+.card-description {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.recent-activity {
+  background: var(--surface-soft);
+  padding: 2.1rem;
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.recent-activity h2 {
+  color: var(--text-main);
+  margin: 0 0 1.2rem 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.activity-item {
+  padding: 1rem;
+  background: rgba(14, 165, 160, 0.04);
+  border-radius: 0.75rem;
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(14, 165, 160, 0.1);
+}
+
+.activity-item:hover {
+  background: rgba(14, 165, 160, 0.08);
+  transform: translateX(3px);
+  border-color: rgba(14, 165, 160, 0.2);
+}
+
+.activity-item.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 3rem 2rem;
+  border: 1px dashed var(--border-light);
+  background: transparent;
+}
+
+.activity-item.empty:hover {
+  transform: none;
+}
+
+.activity-item.empty p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 1.8rem 1.4rem;
+  }
+  .welcome-section h1 {
+    font-size: 1.65rem;
+  }
+  .dashboard-grid {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
+  .recent-activity {
+    padding: 1.35rem;
+  }
+}

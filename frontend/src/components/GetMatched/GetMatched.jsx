@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavigationBar from '../components/Dashboard/NavigationBar';
+import NavigationBar from '../Dashboard/NavigationBar';
 import './GetMatched.css';
 
 const GetMatched = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import NavigationBar from '../components/Dashboard/NavigationBar';
+import NavigationBar from '../Dashboard/NavigationBar';
 import './ExchangeSkill.css';
 
 // Mock data representing the bidirectional skill matching logic since backend doesn't exist yet

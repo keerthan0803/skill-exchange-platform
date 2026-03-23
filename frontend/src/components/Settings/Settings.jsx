@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import NavigationBar from '../components/Dashboard/NavigationBar';
-import { useTheme } from '../context/ThemeContext';
+import NavigationBar from '../Dashboard/NavigationBar';
+import { useTheme } from '../../context/ThemeContext';
 import './Settings.css';
 
 const Settings = () => {

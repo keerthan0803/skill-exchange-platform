@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import NavigationBar from '../components/Dashboard/NavigationBar';
-import { authService } from '../services/api';
+import NavigationBar from '../Dashboard/NavigationBar';
+import { authService } from '../../services/api';
 import './Profile.css';
 
 const Profile = () => {

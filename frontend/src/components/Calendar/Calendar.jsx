@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import NavigationBar from '../components/Dashboard/NavigationBar';
+import NavigationBar from '../Dashboard/NavigationBar';
 import './Calendar.css';
 
 const STORAGE_KEY = 'calendarTasks';

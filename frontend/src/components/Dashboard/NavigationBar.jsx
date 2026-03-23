@@ -1,26 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './NavigationBar.css';
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const username = localStorage.getItem('username');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const profileMenuRef = useRef(null);
+
+  const username = localStorage.getItem('username') || 'User';
+  const email = localStorage.getItem('email') || 'No email available';
+
+  const localUser = useMemo(() => {
+    try {
+      const raw = localStorage.getItem('user');
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      return null;
+    }
+  }, []);
+
+  const displayName = localUser?.fullName || username;
+  const profilePhoto =
+    localUser?.profilePhoto ||
+    localUser?.avatarUrl ||
+    localUser?.photoUrl ||
+    localUser?.imageUrl ||
+    null;
+  const avatarInitial = (displayName || 'U').charAt(0).toUpperCase();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
     navigate('/login');
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      console.log('Searching for:', searchQuery);
-      // Add search functionality here
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!showProfileMenu) {
+        return;
+      }
+
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showProfileMenu]);
 
   const isActive = (path) => {
     return location.pathname === path ? 'nav-link active' : 'nav-link';
@@ -38,12 +69,12 @@ const NavigationBar = () => {
             Dashboard
           </Link>
           
-          <Link to="/profile" className={isActive('/profile')}>
-            My Profile
-          </Link>
-          
           <Link to="/exchange-skill" className={isActive('/exchange-skill')}>
             Exchange Skill
+          </Link>
+
+          <Link to="/calendar" className={isActive('/calendar')}>
+            Calendar
           </Link>
           
           <Link to="/settings" className={isActive('/settings')}>
@@ -52,10 +83,51 @@ const NavigationBar = () => {
         </div>
 
         <div className="nav-user">
-          <span className="user-name">Welcome, {username || 'User'}</span>
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
+          <div className="profile-dropdown-wrap" ref={profileMenuRef}>
+            <button
+              className="profile-trigger-btn"
+              onClick={() => setShowProfileMenu((prev) => !prev)}
+              aria-expanded={showProfileMenu}
+              aria-controls="profile-dropdown"
+            >
+              {profilePhoto ? (
+                <img src={profilePhoto} alt="Profile" className="profile-avatar-image" />
+              ) : (
+                <span className="profile-avatar-fallback">{avatarInitial}</span>
+              )}
+            </button>
+
+            {showProfileMenu && (
+              <div className="profile-dropdown" id="profile-dropdown">
+                <div className="profile-dropdown-header">
+                  <div className="profile-dropdown-avatar">
+                    {profilePhoto ? (
+                      <img src={profilePhoto} alt="Profile" className="profile-avatar-image" />
+                    ) : (
+                      <span className="profile-avatar-fallback">{avatarInitial}</span>
+                    )}
+                  </div>
+                  <div className="profile-dropdown-meta">
+                    <h4>{displayName}</h4>
+                    <p>{email}</p>
+                  </div>
+                </div>
+
+                <div className="profile-dropdown-actions">
+                  <Link
+                    to="/profile"
+                    className="profile-menu-link"
+                    onClick={() => setShowProfileMenu(false)}
+                  >
+                    My Profile
+                  </Link>
+                  <button className="logout-btn" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>

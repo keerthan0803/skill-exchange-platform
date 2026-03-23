@@ -8,6 +8,7 @@ import Profile from '../pages/Profile';
 import Followers from '../pages/Followers';
 import Settings from '../pages/Settings';
 import ExchangeSkill from '../pages/ExchangeSkill';
+import Calendar from '../pages/Calendar';
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/followers" element={<Followers />} />
       <Route path="/exchange-skill" element={<ExchangeSkill />} />
+      <Route path="/calendar" element={<Calendar />} />
       <Route path="/settings" element={<Settings />} />
     </Routes>
   );

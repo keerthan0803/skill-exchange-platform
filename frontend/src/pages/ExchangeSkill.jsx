@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NavigationBar from '../components/Dashboard/NavigationBar';
 import './ExchangeSkill.css';
 
@@ -18,6 +18,14 @@ const ExchangeSkill = () => {
   const [results, setResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [requestsSent, setRequestsSent] = useState(new Set());
+  const [showRequestsPanel, setShowRequestsPanel] = useState(false);
+  const [activeRequestTab, setActiveRequestTab] = useState('sent');
+  const requestsDropdownRef = useRef(null);
+
+  const incomingRequests = [
+    { id: 201, name: 'Nora Blake', wantsToLearn: 'React', offers: 'Figma', avatar: '🧠' },
+    { id: 202, name: 'Ibrahim Khan', wantsToLearn: 'Node.js', offers: 'Docker', avatar: '🛠️' },
+  ];
 
   // Current logged in user's mock skills
   const currentUserSkills = ['React', 'Node.js', 'UI/UX Design'];
@@ -38,6 +46,21 @@ const ExchangeSkill = () => {
     setHasSearched(true);
   }, [searchQuery]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!showRequestsPanel) {
+        return;
+      }
+
+      if (requestsDropdownRef.current && !requestsDropdownRef.current.contains(event.target)) {
+        setShowRequestsPanel(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showRequestsPanel]);
+
   const handleSendRequest = (userId) => {
     // Add the user ID to the set of sent requests
     setRequestsSent(prev => new Set(prev).add(userId));
@@ -48,13 +71,101 @@ const ExchangeSkill = () => {
     return currentUserSkills.includes(desiredSkill);
   };
 
+  const sentRequests = MOCK_USERS.filter((user) => requestsSent.has(user.id));
+
   return (
     <div className="exchange-skill-page">
       <NavigationBar />
       
       <main className="exchange-content">
         <div className="search-header-container">
-          <h1 className="page-title">Exchange a Skill</h1>
+          <div className="search-header-top-row">
+            <h1 className="page-title">Exchange a Skill</h1>
+            <div className="requests-dropdown-wrap" ref={requestsDropdownRef}>
+              <button
+                className="requests-trigger-btn"
+                onClick={() => setShowRequestsPanel((prev) => !prev)}
+                aria-expanded={showRequestsPanel}
+                aria-controls="requests-panel"
+              >
+                Requests
+                <span className="requests-pill">{sentRequests.length + incomingRequests.length}</span>
+              </button>
+
+              {showRequestsPanel && (
+                <div className="requests-panel glass-panel" id="requests-panel">
+                  <div className="requests-panel-header">
+                    <h3>Skill Exchange Requests</h3>
+                    <button
+                      className="requests-close-btn"
+                      onClick={() => setShowRequestsPanel(false)}
+                      aria-label="Close requests"
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <div className="requests-tabs" role="tablist" aria-label="Request categories">
+                    <button
+                      className={`requests-tab ${activeRequestTab === 'sent' ? 'active' : ''}`}
+                      onClick={() => setActiveRequestTab('sent')}
+                      role="tab"
+                      aria-selected={activeRequestTab === 'sent'}
+                    >
+                      Requests Sent ({sentRequests.length})
+                    </button>
+                    <button
+                      className={`requests-tab ${activeRequestTab === 'received' ? 'active' : ''}`}
+                      onClick={() => setActiveRequestTab('received')}
+                      role="tab"
+                      aria-selected={activeRequestTab === 'received'}
+                    >
+                      Requests Came ({incomingRequests.length})
+                    </button>
+                  </div>
+
+                  {activeRequestTab === 'sent' ? (
+                    <div className="requests-list">
+                      {sentRequests.length > 0 ? (
+                        sentRequests.map((user) => (
+                          <article key={user.id} className="request-item">
+                            <div className="request-main">
+                              <span className="request-avatar">{user.avatar}</span>
+                              <div>
+                                <h4>{user.name}</h4>
+                                <p>You requested to learn {user.offeredSkill}</p>
+                              </div>
+                            </div>
+                            <span className="request-status pending">Pending</span>
+                          </article>
+                        ))
+                      ) : (
+                        <p className="requests-empty">No sent requests yet. Send your first request from the cards below.</p>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="requests-list">
+                      {incomingRequests.map((request) => (
+                        <article key={request.id} className="request-item">
+                          <div className="request-main">
+                            <span className="request-avatar">{request.avatar}</span>
+                            <div>
+                              <h4>{request.name}</h4>
+                              <p>Wants to learn {request.wantsToLearn} and offers {request.offers}</p>
+                            </div>
+                          </div>
+                          <div className="request-actions">
+                            <button className="btn btn-sm btn-accept">Accept</button>
+                            <button className="btn btn-sm btn-decline">Decline</button>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
           <p className="page-subtitle">Search for the skill you want to learn, and find users who want to learn what you know.</p>
           
           <div className="search-bar-wrapper">

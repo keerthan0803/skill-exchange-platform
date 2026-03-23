@@ -2,7 +2,9 @@ package jar.service;
 
 import jar.dto.AuthResponse;
 import jar.dto.LoginRequest;
+import jar.dto.ProfileResponseDto;
 import jar.dto.SignupRequest;
+import jar.dto.UpdateProfileRequestDto;
 import jar.model.User;
 import jar.repository.UserRepository;
 import jar.security.JwtUtil;
@@ -81,6 +83,88 @@ public class AuthService {
             user.getEmail(),
             user.getRole(),
             "Login successful!"
+        );
+    }
+
+    public ProfileResponseDto getProfile(String authHeader) {
+        User user = getCurrentUserFromHeader(authHeader);
+        return toProfileResponse(user);
+    }
+
+    public ProfileResponseDto updateProfile(String authHeader, UpdateProfileRequestDto request) {
+        User user = getCurrentUserFromHeader(authHeader);
+
+        if (request == null) {
+            throw new RuntimeException("Request body is required");
+        }
+
+        if (request.getEmail() != null) {
+            String normalizedEmail = request.getEmail().trim().toLowerCase();
+            if (normalizedEmail.isEmpty()) {
+                throw new RuntimeException("email cannot be empty");
+            }
+
+            if (!normalizedEmail.equalsIgnoreCase(user.getEmail()) && userRepository.existsByEmail(normalizedEmail)) {
+                throw new RuntimeException("Email already exists!");
+            }
+
+            user.setEmail(normalizedEmail);
+        }
+
+        user.setFullName(trimToNull(request.getFullName()));
+        user.setBio(trimToNull(request.getBio()));
+        user.setLocation(trimToNull(request.getLocation()));
+        user.setSkills(trimToNull(request.getSkills()));
+        user.setInterests(trimToNull(request.getInterests()));
+
+        User saved = userRepository.save(user);
+        return toProfileResponse(saved);
+    }
+
+    private User getCurrentUserFromHeader(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new RuntimeException("Missing or invalid Authorization header");
+        }
+
+        String token = authHeader.substring(7).trim();
+        if (token.isEmpty()) {
+            throw new RuntimeException("Missing token in Authorization header");
+        }
+
+        String email;
+        try {
+            email = jwtUtil.extractEmail(token);
+        } catch (Exception ex) {
+            throw new RuntimeException("Invalid token");
+        }
+
+        if (jwtUtil.isTokenExpired(token)) {
+            throw new RuntimeException("Token expired");
+        }
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found for token"));
+    }
+
+    private String trimToNull(String value) {
+        if (value == null) {
+            return null;
+        }
+
+        String trimmed = value.trim();
+        return trimmed.isEmpty() ? null : trimmed;
+    }
+
+    private ProfileResponseDto toProfileResponse(User user) {
+        return new ProfileResponseDto(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getFullName(),
+                user.getBio(),
+                user.getLocation(),
+                user.getSkills(),
+                user.getInterests()
         );
     }
 }

@@ -1,0 +1,243 @@
+.calendar-page {
+  min-height: 100vh;
+  background: var(--bg-color);
+}
+
+.calendar-content {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 2.5rem;
+}
+
+.calendar-header {
+  margin-bottom: 1.25rem;
+}
+
+.calendar-header h1 {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.calendar-header p {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+}
+
+.calendar-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.1rem;
+}
+
+.card-surface {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.calendar-board {
+  padding: 1rem;
+}
+
+.calendar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.calendar-toolbar h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-main);
+}
+
+.month-btn {
+  border: 1px solid var(--border-light);
+  background: var(--surface-soft);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 0.42rem 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.month-btn:hover {
+  border-color: rgba(14, 165, 160, 0.35);
+  color: var(--primary);
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.weekdays span {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.day-cell {
+  min-height: 82px;
+  border: 1px solid var(--border-light);
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.68);
+  padding: 0.42rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+.day-cell span {
+  font-weight: 700;
+}
+
+.day-cell small {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.day-cell:hover {
+  border-color: rgba(14, 165, 160, 0.4);
+  transform: translateY(-1px);
+}
+
+.day-cell.selected {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px rgba(14, 165, 160, 0.3);
+  background: color-mix(in srgb, var(--surface-soft) 82%, white 18%);
+}
+
+.day-cell.today span {
+  color: var(--primary);
+}
+
+.day-cell.empty {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.day-plan {
+  padding: 1rem;
+}
+
+.day-plan h3 {
+  margin: 0 0 0.8rem;
+  color: var(--text-main);
+  font-size: 1.05rem;
+}
+
+.task-form {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.task-form label {
+  color: var(--text-main);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.task-form input {
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--border-light);
+  background: #fff;
+  color: var(--text-main);
+}
+
+.task-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 160, 0.16);
+}
+
+.add-btn {
+  margin-top: 0.35rem;
+  border: none;
+  border-radius: 0.65rem;
+  padding: 0.7rem;
+  background: var(--gradient-primary);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.task-list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.task-item {
+  border: 1px solid var(--border-light);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 0.68rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.task-item strong {
+  font-size: 0.85rem;
+  color: var(--primary);
+}
+
+.task-item p {
+  margin: 0.15rem 0 0;
+  color: var(--text-main);
+}
+
+.delete-btn {
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+.empty-text {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 980px) {
+  .calendar-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .calendar-content {
+    padding: 1.25rem 0.85rem 2rem;
+  }
+
+  .day-cell {
+    min-height: 72px;
+  }
+}

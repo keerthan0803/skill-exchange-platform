@@ -24,6 +24,9 @@ public class User {
     
     private String fullName;
     private String bio;
+    private String location;
+    private String skills;
+    private String interests;
     
     @Column(nullable = false)
     private String role = "USER";
@@ -37,13 +40,16 @@ public class User {
 
     public User() {}
 
-    public User(Long id, String username, String email, String password, String fullName, String bio, String role, Integer skillPoints, LocalDateTime createdAt, Boolean isActive) {
+    public User(Long id, String username, String email, String password, String fullName, String bio, String location, String skills, String interests, String role, Integer skillPoints, LocalDateTime createdAt, Boolean isActive) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
         this.bio = bio;
+        this.location = location;
+        this.skills = skills;
+        this.interests = interests;
         this.role = role;
         this.skillPoints = skillPoints;
         this.createdAt = createdAt;
@@ -71,6 +77,15 @@ public class User {
 
     public String getBio() { return bio; }
     public void setBio(String bio) { this.bio = bio; }
+
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
+
+    public String getSkills() { return skills; }
+    public void setSkills(String skills) { this.skills = skills; }
+
+    public String getInterests() { return interests; }
+    public void setInterests(String interests) { this.interests = interests; }
 
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }

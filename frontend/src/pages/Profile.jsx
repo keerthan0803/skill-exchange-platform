@@ -1,30 +1,111 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavigationBar from '../components/Dashboard/NavigationBar';
+import { authService } from '../services/api';
 import './Profile.css';
 
 const Profile = () => {
-  const username = localStorage.getItem('username');
-  const email = localStorage.getItem('email');
+  const usernameFromStorage = localStorage.getItem('username');
+  const emailFromStorage = localStorage.getItem('email');
   const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [profileData, setProfileData] = useState({
-    username: username || '',
-    email: email || '',
+    username: usernameFromStorage || '',
+    fullName: '',
+    email: emailFromStorage || '',
     bio: '',
     skills: '',
     interests: '',
     location: '',
   });
 
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const profile = await authService.getProfile();
+        setProfileData({
+          username: profile.username || usernameFromStorage || '',
+          fullName: profile.fullName || '',
+          email: profile.email || emailFromStorage || '',
+          bio: profile.bio || '',
+          skills: profile.skills || '',
+          interests: profile.interests || '',
+          location: profile.location || '',
+        });
+
+        if (profile.username) {
+          localStorage.setItem('username', profile.username);
+        }
+        if (profile.email) {
+          localStorage.setItem('email', profile.email);
+        }
+      } catch (error) {
+        console.error('Failed to load profile:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, [emailFromStorage, usernameFromStorage]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProfileData({ ...profileData, [name]: value });
   };
 
-  const handleSave = () => {
-    // TODO: Implement API call to save profile
-    setIsEditing(false);
-    console.log('Saving profile:', profileData);
+  const handleSave = async () => {
+    try {
+      setIsSaving(true);
+      const updated = await authService.updateProfile({
+        email: profileData.email,
+        fullName: profileData.fullName,
+        bio: profileData.bio,
+        location: profileData.location,
+        skills: profileData.skills,
+        interests: profileData.interests,
+      });
+
+      setProfileData((prev) => ({
+        ...prev,
+        username: updated.username || prev.username,
+        fullName: updated.fullName || '',
+        email: updated.email || prev.email,
+        bio: updated.bio || '',
+        location: updated.location || '',
+        skills: updated.skills || '',
+        interests: updated.interests || '',
+      }));
+
+      if (updated.username) {
+        localStorage.setItem('username', updated.username);
+      }
+      if (updated.email) {
+        localStorage.setItem('email', updated.email);
+      }
+
+      setIsEditing(false);
+      alert('Profile updated successfully!');
+    } catch (error) {
+      const message = error?.response?.data || 'Failed to update profile';
+      alert(message);
+    } finally {
+      setIsSaving(false);
+    }
   };
+
+  const displayName = profileData.fullName || profileData.username;
+
+  if (isLoading) {
+    return (
+      <div className="profile-container">
+        <NavigationBar />
+        <div className="profile-content">
+          <p>Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="profile-container">
@@ -34,7 +115,7 @@ const Profile = () => {
         <div className="profile-header">
           <div className="profile-avatar">
             <div className="avatar-circle">
-              {username ? username.charAt(0).toUpperCase() : 'U'}
+              {displayName ? displayName.charAt(0).toUpperCase() : 'U'}
             </div>
           </div>
           <h1>My Profile</h1>
@@ -47,8 +128,9 @@ const Profile = () => {
               <button 
                 className="edit-btn" 
                 onClick={() => isEditing ? handleSave() : setIsEditing(true)}
+                disabled={isSaving}
               >
-                {isEditing ? 'Save' : 'Edit'}
+                {isEditing ? (isSaving ? 'Saving...' : 'Save') : 'Edit'}
               </button>
             </div>
 
@@ -65,6 +147,21 @@ const Profile = () => {
                   />
                 ) : (
                   <p>{profileData.username}</p>
+                )}
+              </div>
+
+              <div className="field-group">
+                <label>Full Name</label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={profileData.fullName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your full name"
+                  />
+                ) : (
+                  <p>{profileData.fullName || 'Not specified'}</p>
                 )}
               </div>
 

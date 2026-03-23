@@ -4,7 +4,6 @@ import { useTheme } from '../../context/ThemeContext';
 import './Settings.css';
 
 const Settings = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
   const { theme, setTheme } = useTheme();
   const [settings, setSettings] = useState({
     emailNotifications: true,

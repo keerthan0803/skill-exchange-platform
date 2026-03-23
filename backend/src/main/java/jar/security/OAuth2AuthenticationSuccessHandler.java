@@ -18,7 +18,7 @@ import java.io.IOException;
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    @Value("${app.frontend-url:http://localhost:5173}")
+    @Value("${app.frontend-url:https://keerthan-23eg106b48.vercel.app}")
     private String frontendUrl;
 
     @Autowired

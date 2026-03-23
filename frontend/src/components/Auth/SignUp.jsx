@@ -4,6 +4,9 @@ import { authService } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import './Auth.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://skill-exchange-platform-ixdk.onrender.com/api';
+const OAUTH2_BASE_URL = API_BASE_URL.replace(/\/api\/?$/, '');
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -56,7 +59,7 @@ const SignUp = () => {
   };
 
   const handleGoogleSignup = () => {
-    window.location.href = 'http://localhost:8000/oauth2/authorization/google';
+    window.location.href = `${OAUTH2_BASE_URL}/oauth2/authorization/google`;
   };
 
   return (

@@ -170,10 +170,6 @@
   transform: translateY(-4px);
 }
 
-[data-theme="dark"] .match-card {
-  background: rgba(0, 0, 0, 0.2);
-}
-
 .match-header {
   display: flex;
   align-items: center;

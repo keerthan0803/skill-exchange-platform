@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import NavigationBar from '../Dashboard/NavigationBar';
-import { useTheme } from '../../context/ThemeContext';
 import './Settings.css';
 
 const Settings = () => {
-  const { theme, setTheme } = useTheme();
   const [settings, setSettings] = useState({
     emailNotifications: true,
     pushNotifications: false,
@@ -85,26 +83,6 @@ const Settings = () => {
                 <option value="public">Public</option>
                 <option value="friends">Friends Only</option>
                 <option value="private">Private</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="settings-section">
-            <h2>Appearance</h2>
-            <div className="setting-item">
-              <div className="setting-info">
-                <h3>Theme</h3>
-                <p>Choose your preferred theme</p>
-              </div>
-              <select 
-                name="theme" 
-                value={theme} 
-                onChange={(e) => setTheme(e.target.value)}
-                className="setting-select"
-              >
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="auto">Auto</option>
               </select>
             </div>
           </div>

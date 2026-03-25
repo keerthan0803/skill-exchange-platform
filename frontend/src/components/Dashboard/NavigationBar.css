@@ -220,21 +220,6 @@
   transform: translateY(-1px);
 }
 
-[data-theme="dark"] .delete-account-btn {
-  color: #fb7185;
-  border-color: color-mix(in srgb, #fb7185 72%, #0f1a2b);
-}
-
-[data-theme="dark"] .delete-account-btn:hover {
-  background: #fb7185;
-  color: #09111e;
-  box-shadow: 0 8px 16px rgba(251, 113, 133, 0.3);
-}
-
-[data-theme="dark"] .logout-btn:hover {
-  box-shadow: 0 8px 16px rgba(251, 113, 133, 0.3);
-}
-
 @media (max-width: 992px) {
   .nav-container {
     flex-wrap: wrap;

@@ -349,10 +349,6 @@
   border: 1px solid var(--border-light);
 }
 
-[data-theme="dark"] .skills-bidirectional {
-  background: rgba(0, 0, 0, 0.2);
-}
-
 .skill-box {
   display: flex;
   flex-direction: column;

@@ -193,20 +193,6 @@
   min-height: 100px;
 }
 
-/* Dark Mode */
-[data-theme="dark"] .field-group p {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] .field-group input,
-[data-theme="dark"] .field-group textarea {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .field-group input:disabled {
-  background: rgba(0, 0, 0, 0.1);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .profile-content {

@@ -42,7 +42,7 @@ public class UserService {
         return convertToUserResponseDtoWithFollowing(user, isFollowing);
     }
     
-    public List<UserResponseDto> getMatches(String authHeader, String skillToOffer, String skillToLearn) {
+    public List<MatchResponseDto> getMatches(String authHeader, String skillToOffer, String skillToLearn) {
         Long currentUserId = getCurrentUserId(authHeader);
         User currentUser = userRepository.findById(currentUserId)
                 .orElseThrow(() -> new RuntimeException("User not found"));

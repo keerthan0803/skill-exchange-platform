@@ -96,7 +96,7 @@
   min-height: 82px;
   border: 1px solid var(--border-light);
   border-radius: 0.7rem;
-  background: rgba(255, 255, 255, 0.68);
+  background: var(--surface-soft);
   padding: 0.42rem;
   display: flex;
   flex-direction: column;
@@ -161,7 +161,7 @@
   padding: 0.65rem 0.75rem;
   border-radius: 0.55rem;
   border: 1px solid var(--border-light);
-  background: #fff;
+  background: var(--surface-soft);
   color: var(--text-main);
 }
 
@@ -191,7 +191,7 @@
 .task-item {
   border: 1px solid var(--border-light);
   border-radius: 0.65rem;
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--surface-soft);
   padding: 0.68rem 0.75rem;
   display: flex;
   justify-content: space-between;

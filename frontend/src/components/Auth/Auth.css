@@ -154,8 +154,8 @@
 }
 
 .btn-google:hover {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: color-mix(in srgb, var(--primary) 32%, white);
+  background: var(--surface-soft);
+  border-color: var(--primary);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }

@@ -1,35 +1,30 @@
 import React, { useState } from 'react';
 import NavigationBar from '../Dashboard/NavigationBar';
+import { userService } from '../../services/api';
 import './Search.css';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [error, setError] = useState('');
 
-  // Mock search results
-  const mockUsers = [
-    { id: 1, username: 'John Doe', skills: 'JavaScript, React', interests: 'Python, AI', location: 'New York' },
-    { id: 2, username: 'Jane Smith', skills: 'Python, Django', interests: 'React, Node.js', location: 'California' },
-    { id: 3, username: 'Mike Johnson', skills: 'Java, Spring Boot', interests: 'AWS, DevOps', location: 'Texas' },
-    { id: 4, username: 'Sarah Williams', skills: 'UI/UX Design', interests: 'Frontend Development', location: 'Florida' },
-    { id: 5, username: 'David Brown', skills: 'Machine Learning', interests: 'Data Science', location: 'Washington' }
-  ];
-
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
+    setError('');
+    
     if (searchQuery.trim()) {
       setIsSearching(true);
-      // Simulate API call
-      setTimeout(() => {
-        const results = mockUsers.filter(user => 
-          user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.skills.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.interests.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+      try {
+        const results = await userService.searchUsers(searchQuery);
         setSearchResults(results);
+      } catch (err) {
+        setError('Failed to search users. Please try again.');
+        console.error('Search error:', err);
+        setSearchResults([]);
+      } finally {
         setIsSearching(false);
-      }, 500);
+      }
     }
   };
 
@@ -55,10 +50,16 @@ const Search = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-main-input"
           />
-          <button type="submit" className="search-main-btn">
-            Search
+          <button type="submit" className="search-main-btn" disabled={isSearching}>
+            {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
 
         {isSearching && (
           <div className="search-loading">
@@ -78,17 +79,18 @@ const Search = () => {
                   </div>
                   <div className="user-result-info">
                     <h3>{user.username}</h3>
+                    {user.fullName && <p className="full-name">{user.fullName}</p>}
                     <div className="user-result-detail">
                       <span className="detail-label">📚 Offers:</span>
-                      <span className="detail-value">{user.skills}</span>
+                      <span className="detail-value">{user.skills || 'N/A'}</span>
                     </div>
                     <div className="user-result-detail">
                       <span className="detail-label">🎯 Wants:</span>
-                      <span className="detail-value">{user.interests}</span>
+                      <span className="detail-value">{user.interests || 'N/A'}</span>
                     </div>
                     <div className="user-result-detail">
                       <span className="detail-label">📍 Location:</span>
-                      <span className="detail-value">{user.location}</span>
+                      <span className="detail-value">{user.location || 'N/A'}</span>
                     </div>
                   </div>
                   <button 

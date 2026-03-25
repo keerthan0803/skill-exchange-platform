@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { authService } from '../../services/api';
 import './NavigationBar.css';
 
 const NavigationBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const profileMenuRef = useRef(null);
 
   const username = localStorage.getItem('username') || 'User';
@@ -29,13 +31,49 @@ const NavigationBar = () => {
     null;
   const avatarInitial = (displayName || 'U').charAt(0).toUpperCase();
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('username');
-    localStorage.removeItem('email');
-    localStorage.removeItem('role');
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await authService.logout();
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('username');
+      localStorage.removeItem('email');
+      localStorage.removeItem('role');
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Clear local storage even if API call fails
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('username');
+      localStorage.removeItem('email');
+      localStorage.removeItem('role');
+      navigate('/login');
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
+    if (confirmed) {
+      try {
+        setIsLoggingOut(true);
+        await authService.deleteAccount();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('username');
+        localStorage.removeItem('email');
+        localStorage.removeItem('role');
+        navigate('/login');
+      } catch (error) {
+        console.error('Delete account error:', error);
+        alert('Failed to delete account. Please try again.');
+      } finally {
+        setIsLoggingOut(false);
+      }
+    }
   };
 
   useEffect(() => {
@@ -121,8 +159,19 @@ const NavigationBar = () => {
                   >
                     My Profile
                   </Link>
-                  <button className="logout-btn" onClick={handleLogout}>
-                    Logout
+                  <button 
+                    className="logout-btn" 
+                    onClick={handleLogout}
+                    disabled={isLoggingOut}
+                  >
+                    {isLoggingOut ? 'Logging out...' : 'Logout'}
+                  </button>
+                  <button 
+                    className="delete-account-btn" 
+                    onClick={handleDeleteAccount}
+                    disabled={isLoggingOut}
+                  >
+                    Delete Account
                   </button>
                 </div>
               </div>

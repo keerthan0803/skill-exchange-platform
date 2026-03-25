@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavigationBar from '../Dashboard/NavigationBar';
+import { userService } from '../../services/api';
 import './GetMatched.css';
 
 const GetMatched = () => {
@@ -14,29 +15,30 @@ const GetMatched = () => {
   const [matches, setMatches] = useState([]);
   const [showMatches, setShowMatches] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-
-  // Mock matched users
-  const mockMatches = [
-    { id: 1, username: 'Alice Cooper', skill: 'Python, Django', wants: 'JavaScript, React', match: 95, location: 'New York' },
-    { id: 2, username: 'Bob Martin', skill: 'React, TypeScript', wants: 'Python, Backend', match: 88, location: 'California' },
-    { id: 3, username: 'Charlie Davis', skill: 'Node.js, Express', wants: 'Frontend, React', match: 82, location: 'Texas' }
-  ];
+  const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    
     if (formData.skillToOffer && formData.skillToLearn) {
       setIsSearching(true);
-      // Simulate API call
-      setTimeout(() => {
-        setMatches(mockMatches);
+      try {
+        const results = await userService.getMatches(formData.skillToOffer, formData.skillToLearn);
+        setMatches(results);
         setShowMatches(true);
+      } catch (err) {
+        setError('Failed to find matches. Please try again.');
+        console.error('Match search error:', err);
+        setMatches([]);
+      } finally {
         setIsSearching(false);
-      }, 1500);
+      }
     }
   };
 
@@ -143,11 +145,74 @@ const GetMatched = () => {
           </form>
         </div>
 
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+
         {isSearching && (
           <div className="searching-indicator">
             <div className="spinner-large"></div>
             <p>Finding your perfect matches...</p>
           </div>
+        )}
+
+        {showMatches && !isSearching && (
+          <div className="matches-section">
+            <h2>✨ Your Top Matches {matches.length > 0 ? `(${matches.length})` : ''}</h2>
+            {matches.length > 0 ? (
+              <div className="matches-list">
+                {matches.map(match => (
+                  <div key={match.id} className="match-card">
+                    <div className="match-header">
+                      <div className="match-avatar">
+                        {match.username.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="match-info">
+                        <h3>{match.username}</h3>
+                        {match.fullName && <p className="match-fullname">{match.fullName}</p>}
+                        <p className="match-location">📍 {match.location || 'N/A'}</p>
+                      </div>
+                      <div className="match-score">
+                        <div className="score-circle">{match.matchPercentage}%</div>
+                        <p>Match</p>
+                      </div>
+                    </div>
+                    
+                    <div className="match-details">
+                      <div className="match-detail-item">
+                        <span className="detail-icon">💡</span>
+                        <div>
+                          <strong>Can teach:</strong>
+                          <p>{match.skills || 'N/A'}</p>
+                        </div>
+                      </div>
+                      <div className="match-detail-item">
+                        <span className="detail-icon">🎓</span>
+                        <div>
+                          <strong>Wants to learn:</strong>
+                          <p>{match.interests || 'N/A'}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <button 
+                      className="match-connect-btn"
+                      onClick={() => handleConnect(match.id)}
+                    >
+                      Send Connection Request
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="no-matches">
+                <p>No matches found. Try adjusting your skills.</p>
+              </div>
+            )}
+          </div>
+        )}
         )}
 
         {showMatches && !isSearching && (

@@ -153,7 +153,6 @@ const Followers = () => {
 };
 
 export default Followers;
-        setError('Failed to load network data');
         console.error('Network data error:', err);
       } finally {
         setIsLoading(false);

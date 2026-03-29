@@ -138,8 +138,6 @@ const Profile = () => {
 };
 
 export default Profile;
-
-  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProfileData({ ...profileData, [name]: value });
   };

@@ -141,7 +141,6 @@ const ExchangeSkill = () => {
 };
 
 export default ExchangeSkill;
-  const currentUserSkills = ['React', 'Node.js', 'UI/UX Design'];
 
   useEffect(() => {
     // If search is empty, show everyone to populate the screen initially

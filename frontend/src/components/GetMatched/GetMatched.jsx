@@ -195,8 +195,6 @@ const GetMatched = () => {
 };
 
 export default GetMatched;
-      try {
-        const results = await userService.getMatches(formData.skillToOffer, formData.skillToLearn);
         setMatches(results);
         setShowMatches(true);
       } catch (err) {

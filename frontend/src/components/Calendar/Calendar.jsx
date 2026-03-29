@@ -203,8 +203,6 @@ const Calendar = () => {
 };
 
 export default Calendar;
-  const [taskTime, setTaskTime] = useState('09:00');
-  const [tasksByDate, setTasksByDate] = useState({});
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);

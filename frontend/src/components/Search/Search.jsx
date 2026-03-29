@@ -131,8 +131,6 @@ const Search = () => {
 };
 
 export default Search;
-
-  const handleConnect = (userId) => {
     alert(`Connection request sent to user ${userId}`);
   };
 

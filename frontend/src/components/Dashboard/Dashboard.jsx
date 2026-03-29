@@ -22,9 +22,7 @@ const Dashboard = () => {
           exchanges: 3,
         });
       } catch (err) {
-        setError('Failed to load stats');
-      } finally {
-        setLoading(false);
+        console.error('Failed to load stats:', err);
       }
     };
 

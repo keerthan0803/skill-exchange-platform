@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
-import { Bell, Shield, Eye, Eye as EyeOff, Save, LogOut, Trash2 } from 'lucide-react';
+import { Bell, Shield, Eye as EyeOff, Save, LogOut, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Settings = () => {

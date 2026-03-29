@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
-import { Search as SearchIcon, MapPin, Award, Heart, UserPlus } from 'lucide-react';
+import { Search as SearchIcon, MapPin, Heart, UserPlus } from 'lucide-react';
 import { userService } from '../../services/api';
 
 const Search = () => {

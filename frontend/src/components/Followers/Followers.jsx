@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
 import { Users, UserCheck, UserPlus } from 'lucide-react';
-import { userService, authService } from '../../services/api';
 
 const Followers = () => {
   const [activeTab, setActiveTab] = useState('followers');
@@ -13,8 +12,7 @@ const Followers = () => {
     { id: 3, username: 'charlie_d', fullName: 'Charlie Davis', bio: 'React expert' },
     { id: 4, username: 'diana_p', fullName: 'Diana Prince', bio: 'Designer & developer' },
   ]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+
 
   const handleUnfollow = (userId) => {
     setFollowing(prev => prev.filter(u => u.id !== userId));

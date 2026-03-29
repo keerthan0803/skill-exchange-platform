@@ -36,7 +36,6 @@ const ExchangeSkill = () => {
 
   const pendingRequests = requests.filter(r => r.status === 'pending');
   const acceptedRequests = requests.filter(r => r.status === 'accepted');
-  const rejectedRequests = requests.filter(r => r.status === 'rejected');
 
   const RequestCard = ({ request, showActions }) => (
     <div className="card">

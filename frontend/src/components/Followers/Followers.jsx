@@ -12,7 +12,7 @@ const Followers = () => {
     { id: 3, username: 'charlie_d', fullName: 'Charlie Davis', bio: 'React expert' },
     { id: 4, username: 'diana_p', fullName: 'Diana Prince', bio: 'Designer & developer' },
   ]);
-  const [error, setError] = useState('');
+  const [error] = useState('');
 
   const handleUnfollow = (userId) => {
     setFollowing(prev => prev.filter(u => u.id !== userId));

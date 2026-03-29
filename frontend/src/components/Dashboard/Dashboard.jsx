@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../Layout/Layout';
 import { Heart, Users, Zap, TrendingUp, ArrowRight } from 'lucide-react';
-import { userService } from '../../services/api';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -10,8 +9,6 @@ const Dashboard = () => {
     matches: 0,
     exchanges: 0,
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const user = JSON.parse(localStorage.getItem('user')) || {};
 
   useEffect(() => {

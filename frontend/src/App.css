@@ -5,19 +5,9 @@
 
 .app-container {
   min-height: 100vh;
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
-
-.app-container::before,
-.app-container::after {
-  content: '';
-  position: fixed;
-  inset: auto;
-  border-radius: 999px;
-  pointer-events: none;
   z-index: -1;
   filter: blur(70px);
 }

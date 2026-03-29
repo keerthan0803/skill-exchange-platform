@@ -15,7 +15,7 @@ import GetMatched from '../components/GetMatched/GetMatched';
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Navigate to="/dashboard" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
@@ -27,6 +27,7 @@ const AppRoutes = () => {
       <Route path="/get-matched" element={<GetMatched />} />
       <Route path="/calendar" element={<Calendar />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   );
 };

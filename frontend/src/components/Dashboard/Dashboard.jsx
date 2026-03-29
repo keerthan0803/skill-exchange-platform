@@ -1,60 +1,156 @@
-import React from 'react';
-import NavigationBar from './NavigationBar';
-import './Dashboard.css';
+import React, { useState, useEffect } from 'react';
+import Layout from '../Layout/Layout';
+import { Heart, Users, Zap, TrendingUp, ArrowRight } from 'lucide-react';
+import { userService } from '../../services/api';
 
 const Dashboard = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const [stats, setStats] = useState({
+    followers: 0,
+    following: 0,
+    matches: 0,
+    exchanges: 0,
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const user = JSON.parse(localStorage.getItem('user')) || {};
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        // Replace with actual API calls
+        setStats({
+          followers: 12,
+          following: 8,
+          matches: 5,
+          exchanges: 3,
+        });
+      } catch (err) {
+        setError('Failed to load stats');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  const StatCard = ({ icon: Icon, label, value, color }) => (
+    <div className={`card bg-gradient-to-br ${color} text-white`}>
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium opacity-90">{label}</p>
+          <p className="text-3xl font-bold mt-2">{value}</p>
+        </div>
+        <Icon size={40} className="opacity-50" />
+      </div>
+    </div>
+  );
 
   return (
-    <div className="dashboard-container">
-      <NavigationBar />
-      
-      <div className="dashboard-content">
-        <div className="welcome-section">
-          <h1>Welcome to Your Dashboard, {user?.username || 'User'}!</h1>
-          <p>Manage your skills, connect with others, and grow your network.</p>
+    <Layout>
+      <div className="space-y-8">
+        {/* Header */}
+        <div>
+          <h1 className="section-title">Welcome back, {user.username}!</h1>
+          <p className="section-subtitle">Your skill exchange hub at a glance</p>
         </div>
 
-        <div className="dashboard-grid">
-          <div className="dashboard-card">
-            <div className="card-icon">📚</div>
-            <h3>My Skills</h3>
-            <p className="card-number">0</p>
-            <p className="card-description">Skills you can teach</p>
-          </div>
-
-          <div className="dashboard-card">
-            <div className="card-icon">🎯</div>
-            <h3>Learning</h3>
-            <p className="card-number">0</p>
-            <p className="card-description">Skills you want to learn</p>
-          </div>
-
-          <div className="dashboard-card">
-            <div className="card-icon">👥</div>
-            <h3>Connections</h3>
-            <p className="card-number">0</p>
-            <p className="card-description">Your network</p>
-          </div>
-
-          <div className="dashboard-card">
-            <div className="card-icon">💬</div>
-            <h3>Messages</h3>
-            <p className="card-number">0</p>
-            <p className="card-description">Unread messages</p>
-          </div>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StatCard
+            icon={Users}
+            label="Followers"
+            value={stats.followers}
+            color="from-blue-500 to-cyan-500"
+          />
+          <StatCard
+            icon={Users}
+            label="Following"
+            value={stats.following}
+            color="from-purple-500 to-pink-500"
+          />
+          <StatCard
+            icon={Heart}
+            label="Matches"
+            value={stats.matches}
+            color="from-red-500 to-orange-500"
+          />
+          <StatCard
+            icon={Zap}
+            label="Exchanges"
+            value={stats.exchanges}
+            color="from-yellow-500 to-amber-500"
+          />
         </div>
 
-        <div className="recent-activity">
-          <h2>Recent Activity</h2>
-          <div className="activity-list">
-            <div className="activity-item empty">
-              <p>No recent activity yet. Start connecting with others!</p>
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="card">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
+                <p className="text-gray-600 text-sm mt-1">Your latest interactions</p>
+              </div>
+              <TrendingUp className="text-blue-600" size={24} />
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <p className="font-medium text-gray-900">New match found</p>
+                  <p className="text-sm text-gray-600">2 hours ago</p>
+                </div>
+                <ArrowRight className="text-gray-400" size={20} />
+              </div>
+              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <p className="font-medium text-gray-900">New follower</p>
+                  <p className="text-sm text-gray-600">5 hours ago</p>
+                </div>
+                <ArrowRight className="text-gray-400" size={20} />
+              </div>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">Getting Started</h3>
+                <p className="text-gray-600 text-sm mt-1">Complete your profile</p>
+              </div>
+              <Zap className="text-yellow-600" size={24} />
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                <p className="text-sm text-gray-700">Add profile picture</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                <p className="text-sm text-gray-700">Add your skills</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <p className="text-sm text-gray-700">Find your first match</p>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Featured Section */}
+        <div className="card bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-bold text-gray-900">Ready to exchange your first skill?</h3>
+              <p className="text-gray-600 mt-2">Find someone who wants to learn what you know</p>
+            </div>
+            <button className="btn-primary flex items-center gap-2">
+              Find Matches
+              <ArrowRight size={20} />
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

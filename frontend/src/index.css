@@ -95,7 +95,7 @@
   }
 
   .card-hover {
-    @apply cursor-pointer transform transition-all duration-200 hover:scale-102;
+    @apply cursor-pointer transform transition-all duration-200 hover:scale-105;
   }
 
   .input-field {

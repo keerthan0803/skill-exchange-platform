@@ -11,6 +11,7 @@ import ExchangeSkill from '../components/ExchangeSkill/ExchangeSkill';
 import Calendar from '../components/Calendar/Calendar';
 import Search from '../components/Search/Search';
 import GetMatched from '../components/GetMatched/GetMatched';
+import Chat from '../components/Chat/Chat';
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/get-matched" element={<GetMatched />} />
       <Route path="/calendar" element={<Calendar />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/chat" element={<Chat />} />
       <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   );

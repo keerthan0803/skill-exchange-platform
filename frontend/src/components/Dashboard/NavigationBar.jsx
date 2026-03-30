@@ -107,6 +107,10 @@ const NavigationBar = () => {
             Dashboard
           </Link>
           
+          <Link to="/chat" className={isActive('/chat')}>
+            Messages
+          </Link>
+          
           <Link to="/exchange-skill" className={isActive('/exchange-skill')}>
             Exchange Skill
           </Link>

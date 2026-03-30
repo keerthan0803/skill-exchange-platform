@@ -121,4 +121,31 @@ export const skillRequestService = {
   },
 };
 
+export const chatService = {
+  getUserChats: async () => {
+    const response = await api.get('/chats');
+    return response.data;
+  },
+
+  startChat: async (otherUserId) => {
+    const response = await api.post('/chats', null, {
+      params: { otherUserId }
+    });
+    return response.data;
+  },
+
+  getMessages: async (chatId) => {
+    const response = await api.get(`/chats/${chatId}/messages`);
+    return response.data;
+  },
+
+  sendMessage: async (recipientId, content) => {
+    const response = await api.post('/chats/send', {
+      recipientId,
+      content
+    });
+    return response.data;
+  },
+};
+
 export default api;

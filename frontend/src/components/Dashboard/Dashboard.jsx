@@ -56,25 +56,25 @@ const Dashboard = () => {
             icon={Users}
             label="Followers"
             value={stats.followers}
-            color="from-blue-500 to-cyan-500"
+            color="from-slate-600 to-slate-700"
           />
           <StatCard
             icon={Users}
             label="Following"
             value={stats.following}
-            color="from-purple-500 to-pink-500"
+            color="from-cyan-500 to-cyan-600"
           />
           <StatCard
             icon={Heart}
             label="Matches"
             value={stats.matches}
-            color="from-red-500 to-orange-500"
+            color="from-emerald-500 to-emerald-600"
           />
           <StatCard
             icon={Zap}
             label="Exchanges"
             value={stats.exchanges}
-            color="from-yellow-500 to-amber-500"
+            color="from-red-500 to-red-600"
           />
         </div>
 
@@ -98,10 +98,10 @@ const Dashboard = () => {
               </div>
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div>
-                  <p className="font-medium text-gray-900">New follower</p>
-                  <p className="text-sm text-gray-600">5 hours ago</p>
+                  <p className="font-medium text-slate-900">New follower</p>
+                  <p className="text-sm text-slate-600">5 hours ago</p>
                 </div>
-                <ArrowRight className="text-gray-400" size={20} />
+                <ArrowRight className="text-slate-400" size={20} />
               </div>
             </div>
           </div>
@@ -109,34 +109,34 @@ const Dashboard = () => {
           <div className="card">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">Getting Started</h3>
-                <p className="text-gray-600 text-sm mt-1">Complete your profile</p>
+                <h3 className="text-lg font-semibold text-slate-900">Getting Started</h3>
+                <p className="text-slate-600 text-sm mt-1">Complete your profile</p>
               </div>
-              <Zap className="text-yellow-600" size={24} />
+              <Zap className="text-cyan-600" size={24} />
             </div>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                <p className="text-sm text-gray-700">Add profile picture</p>
+                <div className="w-2 h-2 bg-cyan-600 rounded-full"></div>
+                <p className="text-sm text-slate-700">Add profile picture</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                <p className="text-sm text-gray-700">Add your skills</p>
+                <div className="w-2 h-2 bg-emerald-600 rounded-full"></div>
+                <p className="text-sm text-slate-700">Add your skills</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-                <p className="text-sm text-gray-700">Find your first match</p>
+                <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
+                <p className="text-sm text-slate-700">Find your first match</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Featured Section */}
-        <div className="card bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200">
+        <div className="card bg-gradient-to-r from-cyan-50 to-slate-50 border-2 border-cyan-200">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-xl font-bold text-gray-900">Ready to exchange your first skill?</h3>
-              <p className="text-gray-600 mt-2">Find someone who wants to learn what you know</p>
+              <h3 className="text-xl font-bold text-slate-900">Ready to exchange your first skill?</h3>
+              <p className="text-slate-600 mt-2">Find someone who wants to learn what you know</p>
             </div>
             <button className="btn-primary flex items-center gap-2">
               Find Matches

@@ -45,10 +45,10 @@ const Profile = () => {
           <div className="flex flex-col md:flex-row gap-6 md:gap-10">
             {/* Avatar */}
             <div className="flex flex-col items-center">
-              <div className="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+              <div className="w-32 h-32 bg-gradient-to-r from-slate-700 to-cyan-600 rounded-full flex items-center justify-center text-white text-4xl font-bold">
                 {user.username?.charAt(0).toUpperCase() || 'U'}
               </div>
-              <p className="mt-4 text-gray-600 text-center text-sm">@{user.username}</p>
+              <p className="mt-4 text-slate-600 text-center text-sm">@{user.username}</p>
             </div>
 
             {/* User Info */}
@@ -56,7 +56,7 @@ const Profile = () => {
               {isEditing ? (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
                     <input
                       type="text"
                       name="fullName"
@@ -66,7 +66,7 @@ const Profile = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Bio</label>
                     <textarea
                       name="bio"
                       value={formData.bio}
@@ -83,15 +83,15 @@ const Profile = () => {
                 </div>
               ) : (
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">{formData.fullName || user.username}</h2>
-                  <p className="text-gray-600 mt-2">{formData.bio || 'No bio yet'}</p>
+                  <h2 className="text-2xl font-bold text-slate-900">{formData.fullName || user.username}</h2>
+                  <p className="text-slate-600 mt-2">{formData.bio || 'No bio yet'}</p>
                   <div className="flex flex-wrap gap-4 mt-4">
-                    <div className="flex items-center gap-2 text-gray-600">
+                    <div className="flex items-center gap-2 text-slate-600">
                       <Mail size={18} />
                       <span className="text-sm">{formData.email}</span>
                     </div>
                     {formData.location && (
-                      <div className="flex items-center gap-2 text-gray-600">
+                      <div className="flex items-center gap-2 text-slate-600">
                         <MapPin size={18} />
                         <span className="text-sm">{formData.location}</span>
                       </div>
@@ -106,13 +106,13 @@ const Profile = () => {
         {/* Skills Section */}
         <div className="card">
           <div className="flex items-center gap-2 mb-4">
-            <Award className="text-blue-600" size={24} />
-            <h3 className="text-lg font-semibold text-gray-900">My Skills</h3>
+            <Award className="text-cyan-600" size={24} />
+            <h3 className="text-lg font-semibold text-slate-900">My Skills</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 border-2 border-dashed border-gray-300 rounded-lg text-center text-gray-600">
+            <div className="p-4 border-2 border-dashed border-slate-300 rounded-lg text-center text-slate-600">
               <p>No skills added yet</p>
-              <button className="text-blue-600 font-medium mt-2 hover:text-blue-700">+ Add Skill</button>
+              <button className="text-cyan-600 font-medium mt-2 hover:text-cyan-700">+ Add Skill</button>
             </div>
           </div>
         </div>
@@ -120,16 +120,16 @@ const Profile = () => {
         {/* Statistics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="card">
-            <p className="text-gray-600 text-sm mb-1">Followers</p>
-            <p className="text-3xl font-bold text-gray-900">12</p>
+            <p className="text-slate-600 text-sm mb-1">Followers</p>
+            <p className="text-3xl font-bold text-slate-900">12</p>
           </div>
           <div className="card">
-            <p className="text-gray-600 text-sm mb-1">Following</p>
-            <p className="text-3xl font-bold text-gray-900">8</p>
+            <p className="text-slate-600 text-sm mb-1">Following</p>
+            <p className="text-3xl font-bold text-slate-900">8</p>
           </div>
           <div className="card">
-            <p className="text-gray-600 text-sm mb-1">Member Since</p>
-            <p className="text-lg font-bold text-gray-900">Mar 2024</p>
+            <p className="text-slate-600 text-sm mb-1">Member Since</p>
+            <p className="text-lg font-bold text-slate-900">Mar 2024</p>
           </div>
         </div>
       </div>

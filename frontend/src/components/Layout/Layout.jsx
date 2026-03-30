@@ -35,17 +35,17 @@ const Layout = ({ children }) => {
       >
         {/* Close button for mobile */}
         <div className="md:hidden flex justify-end p-4">
-          <button onClick={() => setSidebarOpen(false)} className="text-gray-600">
+          <button onClick={() => setSidebarOpen(false)} className="text-slate-600">
             <X size={24} />
           </button>
         </div>
 
         {/* Logo */}
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <div className="px-6 py-4 border-b border-slate-200">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-slate-700 to-cyan-600 bg-clip-text text-transparent">
             SkillTrade
           </h1>
-          <p className="text-xs text-gray-600 mt-1">Exchange & Learn</p>
+          <p className="text-xs text-slate-500 mt-1">Exchange & Learn</p>
         </div>
 
         {/* Menu Items */}
@@ -59,8 +59,8 @@ const Layout = ({ children }) => {
               }}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                 isActive(path)
-                  ? 'bg-blue-50 text-blue-600 border-l-4 border-blue-600'
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-cyan-50 text-cyan-600 border-l-4 border-cyan-600'
+                  : 'text-slate-700 hover:bg-slate-50'
               }`}
             >
               <Icon size={20} />
@@ -70,7 +70,7 @@ const Layout = ({ children }) => {
         </nav>
 
         {/* Logout Button */}
-        <div className="border-t border-gray-200 p-3">
+        <div className="border-t border-slate-200 p-3">
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200 font-medium"
@@ -84,17 +84,17 @@ const Layout = ({ children }) => {
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
         {/* Top Header */}
-        <div className="bg-white shadow-sm sticky top-0 z-40">
+        <div className="bg-white shadow-sm sticky top-0 z-40 border-b border-slate-200">
           <div className="flex items-center justify-between px-4 md:px-6 py-4">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="md:hidden text-gray-600 hover:text-gray-900"
+              className="md:hidden text-slate-600 hover:text-slate-900"
             >
               <Menu size={24} />
             </button>
             <div className="flex items-center gap-4">
-              <span className="text-gray-600 text-sm md:text-base">Welcome to SkillTrade</span>
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+              <span className="text-slate-600 text-sm md:text-base">Welcome to SkillTrade</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-slate-700 to-cyan-600 rounded-full"></div>
             </div>
           </div>
         </div>

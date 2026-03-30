@@ -56,26 +56,26 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-cyan-50 to-white flex items-center justify-center p-4">
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-12 animate-pulse"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-200 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
 
       <div className="relative z-10 w-full max-w-md">
         {/* Logo Section */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="text-blue-600" size={32} />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <Sparkles className="text-cyan-600" size={32} />
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-700 to-cyan-600 bg-clip-text text-transparent">
               SkillTrade
             </h1>
           </div>
-          <p className="text-gray-600 text-lg">Start Your Learning Journey</p>
+          <p className="text-slate-600 text-lg">Start Your Learning Journey</p>
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 backdrop-blur-sm bg-opacity-95">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Create Account</h2>
+        <div className="bg-white rounded-2xl shadow-xl p-8 backdrop-blur-sm bg-opacity-95 border border-slate-100">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Create Account</h2>
 
           {/* Error Message */}
           {error && (
@@ -88,9 +88,9 @@ const SignUp = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Full Name Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
               <div className="relative">
-                <User className="absolute left-3 top-3 text-gray-400" size={20} />
+                <User className="absolute left-3 top-3 text-slate-400" size={20} />
                 <input
                   type="text"
                   name="fullName"
@@ -105,9 +105,9 @@ const SignUp = () => {
 
             {/* Username Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Username</label>
               <div className="relative">
-                <User className="absolute left-3 top-3 text-gray-400" size={20} />
+                <User className="absolute left-3 top-3 text-slate-400" size={20} />
                 <input
                   type="text"
                   name="username"
@@ -122,9 +122,9 @@ const SignUp = () => {
 
             {/* Email Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-gray-400" size={20} />
+                <Mail className="absolute left-3 top-3 text-slate-400" size={20} />
                 <input
                   type="email"
                   name="email"
@@ -139,9 +139,9 @@ const SignUp = () => {
 
             {/* Password Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 text-gray-400" size={20} />
+                <Lock className="absolute left-3 top-3 text-slate-400" size={20} />
                 <input
                   type="password"
                   name="password"
@@ -156,9 +156,9 @@ const SignUp = () => {
 
             {/* Confirm Password Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Confirm Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 text-gray-400" size={20} />
+                <Lock className="absolute left-3 top-3 text-slate-400" size={20} />
                 <input
                   type="password"
                   name="confirmPassword"
@@ -185,10 +185,10 @@ const SignUp = () => {
           {/* Divider */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
+              <div className="w-full border-t border-slate-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or sign up with</span>
+              <span className="px-2 bg-white text-slate-500">Or sign up with</span>
             </div>
           </div>
 
@@ -196,7 +196,7 @@ const SignUp = () => {
           <button
             type="button"
             onClick={handleOAuth}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 text-gray-700 font-medium"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors duration-200 text-slate-700 font-medium"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -220,12 +220,12 @@ const SignUp = () => {
           </button>
 
           {/* Footer */}
-          <p className="text-center text-gray-600 text-sm mt-6">
+          <p className="text-center text-slate-600 text-sm mt-6">
             Already have an account?{' '}
             <button
               type="button"
               onClick={() => navigate('/login')}
-              className="text-blue-600 hover:text-blue-700 font-semibold"
+              className="text-cyan-600 hover:text-cyan-700 font-semibold"
             >
               Sign in
             </button>
@@ -233,7 +233,7 @@ const SignUp = () => {
         </div>
 
         {/* Bottom Text */}
-        <p className="text-center text-gray-600 text-xs mt-8">
+        <p className="text-center text-slate-600 text-xs mt-8">
           By signing up, you agree to our Terms of Service and Privacy Policy
         </p>
       </div>

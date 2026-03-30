@@ -4,9 +4,60 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Professional Minimalistic Color Palette */
+:root {
+  /* Primary: Professional Slate */
+  --primary: #1e293b;
+  --primary-hover: #0f172a;
+  
+  /* Secondary: Modern Cyan */
+  --secondary: #06b6d4;
+  --secondary-hover: #0891b2;
+  
+  /* Status Colors */
+  --accent: #ef4444;
+  --accent-hover: #dc2626;
+  --success: #10b981;
+  --success-hover: #059669;
+  --warning: #f59e0b;
+  --warning-hover: #d97706;
+  
+  /* Neutral Colors */
+  --bg-color: #ffffff;
+  --surface-color: #f8f9fa;
+  --surface-soft: #f0f1f5;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --border-light: #e2e8f0;
+  
+  /* Glass Morphism */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(226, 232, 240, 0.6);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #1e293b, #0f172a);
+  --gradient-secondary: linear-gradient(135deg, #06b6d4, #0891b2);
+  --gradient-success: linear-gradient(135deg, #10b981, #059669);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.16);
+  --shadow-glass: 0 8px 32px rgba(15, 23, 42, 0.08);
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Typography */
+  --font-sans: 'Inter', 'Segoe UI', sans-serif;
+  --font-display: 'Inter', 'Segoe UI', sans-serif;
+}
+
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 font-sans;
+    @apply bg-white text-slate-900 font-sans;
   }
 
   h1 {
@@ -24,15 +75,15 @@
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-blue-600 hover:bg-blue-700 text-black font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg;
+    @apply px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg;
   }
 
   .btn-secondary {
-    @apply px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium rounded-lg transition-colors duration-200;
+    @apply px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg transition-colors duration-200;
   }
 
   .btn-ghost {
-    @apply px-4 py-2 text-gray-700 hover:bg-gray-100 font-medium rounded-lg transition-colors duration-200;
+    @apply px-4 py-2 text-slate-600 hover:bg-slate-100 font-medium rounded-lg transition-colors duration-200;
   }
 
   .btn-danger {
@@ -40,43 +91,43 @@
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 p-6;
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 p-6 border border-slate-100;
   }
 
   .card-hover {
-    @apply cursor-pointer transform transition-all duration-200 hover:scale-105;
+    @apply cursor-pointer transform transition-all duration-200 hover:scale-102;
   }
 
   .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white;
+    @apply w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 bg-white;
   }
 
   .input-error {
-    @apply border-red-500 focus:ring-red-500;
+    @apply border-red-400 focus:ring-red-500;
   }
 
   .badge {
-    @apply inline-block px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full;
+    @apply inline-block px-3 py-1 text-sm font-medium bg-slate-100 text-slate-700 rounded-full;
   }
 
   .badge-success {
-    @apply inline-block px-3 py-1 text-sm font-medium bg-green-100 text-green-800 rounded-full;
+    @apply inline-block px-3 py-1 text-sm font-medium bg-emerald-100 text-emerald-700 rounded-full;
   }
 
   .badge-warning {
-    @apply inline-block px-3 py-1 text-sm font-medium bg-yellow-100 text-yellow-800 rounded-full;
+    @apply inline-block px-3 py-1 text-sm font-medium bg-amber-100 text-amber-700 rounded-full;
   }
 
   .badge-danger {
-    @apply inline-block px-3 py-1 text-sm font-medium bg-red-100 text-red-800 rounded-full;
+    @apply inline-block px-3 py-1 text-sm font-medium bg-red-100 text-red-700 rounded-full;
   }
 
   .section-title {
-    @apply text-3xl font-bold text-gray-900 mb-2;
+    @apply text-3xl font-bold text-slate-900 mb-2;
   }
 
   .section-subtitle {
-    @apply text-gray-600 text-lg;
+    @apply text-slate-600 text-lg;
   }
 }
 
@@ -94,9 +145,8 @@ body,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image:
-    radial-gradient(circle at 12% 18%, rgba(245, 158, 11, 0.14), transparent 34%),
-    radial-gradient(circle at 82% 12%, rgba(14, 165, 160, 0.16), transparent 36%),
-    radial-gradient(circle at 74% 86%, rgba(251, 113, 133, 0.12), transparent 38%);
+    radial-gradient(circle at 15% 20%, rgba(6, 182, 212, 0.06), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(30, 41, 59, 0.04), transparent 45%);
   background-attachment: fixed;
 }
 
@@ -115,13 +165,13 @@ h6 {
 }
 
 a {
-  color: var(--primary);
+  color: var(--secondary);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--primary-hover);
+  color: var(--secondary-hover);
 }
 
 input,
@@ -140,8 +190,8 @@ button {
 
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-glass);
   border-radius: 1.1rem;
@@ -153,8 +203,8 @@ button {
   justify-content: center;
   padding: 0.78rem 1.5rem;
   border-radius: 0.8rem;
-  font-weight: 700;
-  font-size: 0.96rem;
+  font-weight: 600;
+  font-size: 0.95rem;
   letter-spacing: 0.01em;
   transition: all var(--transition-bounce);
   text-align: center;
@@ -163,12 +213,12 @@ button {
 .btn-primary {
   background: var(--gradient-primary);
   color: #fff;
-  box-shadow: 0 8px 18px rgba(15, 118, 110, 0.3);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 26px rgba(15, 118, 110, 0.34);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-primary:active {
@@ -176,19 +226,24 @@ button {
 }
 
 .btn-success {
-  background: linear-gradient(130deg, #15803d 0%, #16a34a 100%);
+  background: var(--gradient-success);
   color: #fff;
-  box-shadow: 0 8px 18px rgba(22, 163, 74, 0.3);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--primary);
-  border: 1.5px solid var(--primary);
+  color: var(--secondary);
+  border: 1.5px solid var(--secondary);
 }
 
 .btn-secondary:hover {
-  background: var(--primary);
+  background: var(--secondary);
   color: #fff;
   transform: translateY(-2px);
 }
